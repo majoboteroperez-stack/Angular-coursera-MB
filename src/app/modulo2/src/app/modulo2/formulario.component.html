@@ -1,0 +1,24 @@
+<form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+  
+  <div>
+    <label>Nombre de Usuario:</label>
+    <input type="text" formControlName="usuario">
+    
+    <div *ngIf="miFormulario.get('usuario')?.hasError('required') && miFormulario.get('usuario')?.touched">
+      <small style="color: red;">Este campo es obligatorio.</small>
+    </div>
+    <div *ngIf="miFormulario.get('usuario')?.hasError('errorMinimo')">
+      <small style="color: red;">Debe tener al menos 5 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Comentario:</label>
+    <input type="text" formControlName="comentario">
+    <div *ngIf="miFormulario.get('comentario')?.hasError('required') && miFormulario.get('comentario')?.touched">
+      <small style="color: red;">El comentario no puede estar vacío.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="miFormulario.invalid">Enviar Datos</button>
+</form>
